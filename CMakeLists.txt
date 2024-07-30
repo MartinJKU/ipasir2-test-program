@@ -20,7 +20,7 @@ add_subdirectory(deps/ipasir2-cpp)
 
 add_executable(MyExecutable testsat.cpp)
 
-target_link_libraries(MyExecutable PRIVATE ipasir2cpp)
+target_link_libraries(MyExecutable PRIVATE ipasir2cpp libminisat)
 
 if (NOT WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   target_link_libraries(MyExecutable PRIVATE atomic)
