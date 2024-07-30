@@ -4,16 +4,22 @@ project(MyProject)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-option(USE_MINISAT "Use Minisat solver" OFF)
-option(USE_LINGELING "Use Lingeling solver" OFF)
+option(USE_MINISAT "Use Minisat SAT Solver" ON)
+option(USE_LINGELING "Use Lingeling SAT Solver" OFF)
+option(USE_CRYPTOMINISAT "Use Cryptominisat SAT Solver" OFF)
 
 if (USE_MINISAT)
   set(SAT_SOLVER "minisat-lib-static")
+  #add_subdirectory(deps/ipasir2_solver_minisat)
 elseif (USE_LINGELING)
   set(SAT_SOLVER "lingeling-static")
+  #add_subdirectory(deps/ipasir2_solver_lingeling)
+elseif (USE_CRYPTOMINISAT)
+  set(SAT_SOLVER "ipasircryptominisat5")
+  #add_subdirectory(deps/ipasir2_solver_cryptominisat)
 endif()
 
-add_subdirectory(deps)
+add_subdirectory(deps/ipasir2-cpp)
 
 add_executable(MyExecutable testsat.cpp)
 
@@ -40,4 +46,3 @@ else()
     -pedantic
   )
 endif()
-
