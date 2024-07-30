@@ -10,20 +10,17 @@ option(USE_CRYPTOMINISAT "Use Cryptominisat SAT Solver" OFF)
 
 if (USE_MINISAT)
   set(SAT_SOLVER "minisat-lib-static")
-  #add_subdirectory(deps/ipasir2_solver_minisat)
 elseif (USE_LINGELING)
   set(SAT_SOLVER "lingeling-static")
-  #add_subdirectory(deps/ipasir2_solver_lingeling)
 elseif (USE_CRYPTOMINISAT)
   set(SAT_SOLVER "ipasircryptominisat5")
-  #add_subdirectory(deps/ipasir2_solver_cryptominisat)
 endif()
 
 add_subdirectory(deps/ipasir2-cpp)
 
 add_executable(MyExecutable testsat.cpp)
 
-target_link_libraries(MyExecutable PRIVATE ipasir2cpp ${SAT_SOLVER})
+target_link_libraries(MyExecutable PRIVATE ipasir2cpp)
 
 if (NOT WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   target_link_libraries(MyExecutable PRIVATE atomic)
